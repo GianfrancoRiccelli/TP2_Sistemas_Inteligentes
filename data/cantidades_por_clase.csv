@@ -1,0 +1,13 @@
+clase,nombre,train,val,test,total
+Ac,Altocúmulo,133,44,44,221
+As,Altostrato,113,37,38,188
+Cb,Cumulonimbo,145,49,48,242
+Cc,Cirrocúmulo,160,54,54,268
+Ci,Cirro,83,28,28,139
+Cs,Cirrostrato,172,57,58,287
+Ct,Estela de avión,120,40,40,200
+Cu,Cúmulo,110,36,36,182
+Ns,Nimbostrato,164,55,55,274
+Sc,Estratocúmulo,204,68,68,340
+St,Estrato,121,41,40,202
+Total,,1525,509,509,2543

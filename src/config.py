@@ -11,7 +11,15 @@ RUTA_DATASET = Path(os.environ.get("TP2_DATASET", RAIZ_REPO.parent / "CCSN" / "C
 
 RUTA_RESULTADOS = RAIZ_REPO / "results"
 
+# Partición ya armada (data/train, data/val, data/test), dentro del repo
+RUTA_DATOS = RAIZ_REPO / "data"
+CONJUNTOS = ("train", "val", "test")
+
 SEED = 42
+
+# Proporciones de la partición: 60 / 20 / 20
+PROPORCION_TEST = 0.2
+PROPORCION_VAL = 0.2
 
 TAMANIO_IMAGEN = (256, 256)
 

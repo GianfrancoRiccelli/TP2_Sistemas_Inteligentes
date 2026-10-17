@@ -4,20 +4,18 @@ Trabajo Práctico N.º 2 de **Inteligencia Artificial** (UTN FRBA, curso K5672, 
 
 El objetivo es clasificar automáticamente una fotografía de cielo tomada desde tierra en uno de **11 tipos de nube**, usando redes neuronales artificiales. Se entrenan y comparan tres modelos: un perceptrón multicapa (MLP) entrenado con backpropagation, una red convolucional construida desde cero y una red convolucional preentrenada.
 
-> **Estado:** en desarrollo. Este README describe el plan de trabajo; las secciones de uso y resultados se completan a medida que avanza la implementación.
-
 ## Problema
 
 La Organización Meteorológica Mundial (OMM) clasifica las nubes en diez géneros según su altura y su aspecto. Esa identificación se usa en el pronóstico de corto plazo, en los reportes para la aviación (por ejemplo, la presencia de cumulonimbos) y en estudios de clima y de energía solar. Hoy la hacen a ojo observadores entrenados, por lo que depende de la experiencia de cada persona y es inconsistente entre estaciones.
 
 No se puede resolver con reglas explícitas: lo que distingue, por ejemplo, un altocúmulo de un cirrocúmulo o un estrato de un nimbostrato es la textura, la distribución y la opacidad de la nube, y esas propiedades cambian con la iluminación, la hora y el ángulo de la toma. Por eso se usa un sistema que aprende esas regularidades a partir de ejemplos etiquetados.
 
-- **Entrada:** imagen RGB de 256×256 píxeles.
+- **Entrada:** imagen RGB, redimensionada a 256×256 píxeles.
 - **Salida:** una de las 11 clases (la red devuelve una probabilidad por clase y se elige la mayor).
 
 ## Dataset
 
-Se usa **CCSN (Cirrus Cumulus Stratus Nimbus) v2**, publicado en Harvard Dataverse bajo licencia CC0: 2.543 imágenes JPEG de 256×256 RGB, etiquetadas por profesionales meteorológicos y organizadas en una carpeta por clase. Incluye los 10 géneros de la OMM más las estelas de condensación de aviones (contrails).
+Se usa **CCSN (Cirrus Cumulus Stratus Nimbus) v2**, publicado en Harvard Dataverse bajo licencia CC0: 2.543 imágenes JPEG RGB, etiquetadas por profesionales meteorológicos y organizadas en una carpeta por clase. Incluye los 10 géneros de la OMM más las estelas de condensación de aviones (contrails).
 
 | Clase | Abreviatura | Imágenes |
 |---|---|---:|
@@ -35,6 +33,10 @@ Se usa **CCSN (Cirrus Cumulus Stratus Nimbus) v2**, publicado en Harvard Dataver
 | **Total** | | **2.543** |
 
 El conjunto está moderadamente desbalanceado: la clase mayor (Sc, 340) tiene casi 2,5 veces más ejemplos que la menor (Ci, 139). Algunas clases se confunden incluso a simple vista, como Ac y Cc, St y Ns, o As y Cs.
+
+Aunque la descripción del dataset dice que todas las imágenes son de 256×256, en la exploración se encontró que 2.332 son de 400×400 y solo 211 son de 256×256 (todas en Cc, Cs y Ns). Por eso todas las imágenes se redimensionan a un tamaño común antes de entrenar.
+
+![Distribución de clases](results/exploracion/distribucion_clases.png)
 
 ## Metodología
 

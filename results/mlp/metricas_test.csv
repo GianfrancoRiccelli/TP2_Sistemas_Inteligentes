@@ -1,0 +1,14 @@
+clase,nombre,precision,recuperacion,soporte
+Ac,Altocúmulo,0.0000,0.0000,44
+As,Altostrato,1.0000,0.0263,38
+Cb,Cumulonimbo,0.0000,0.0000,48
+Cc,Cirrocúmulo,0.2000,0.5556,54
+Ci,Cirro,0.0000,0.0000,28
+Cs,Cirrostrato,0.1714,0.1034,58
+Ct,Estela de avión,0.3696,0.4250,40
+Cu,Cúmulo,0.0000,0.0000,36
+Ns,Nimbostrato,0.0000,0.0000,55
+Sc,Estratocúmulo,0.2058,0.8382,68
+St,Estrato,0.0000,0.0000,40
+promedio macro,,0.1770,0.1771,509
+exactitud,,,,0.2181

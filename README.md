@@ -2,7 +2,7 @@
 
 Trabajo Práctico N.º 2 de **Inteligencia Artificial** (UTN FRBA, curso K5672, 2.º cuatrimestre de 2026), **Grupo 16**.
 
-El objetivo es clasificar automáticamente una fotografía de cielo tomada desde tierra en uno de **11 tipos de nube**, usando redes neuronales artificiales. Se entrenan y comparan tres modelos: un perceptrón multicapa (MLP) entrenado con backpropagation, una red convolucional construida desde cero y una red convolucional preentrenada.
+El objetivo es clasificar automáticamente una fotografía de cielo tomada desde tierra en uno de **11 tipos de nube**, usando redes neuronales artificiales. Se entrenan y comparan cuatro modelos: un perceptrón multicapa (MLP) entrenado con backpropagation, una red convolucional construida desde cero, una red convolucional preentrenada y esa misma red con ajuste fino y aumento de datos.
 
 ## Problema
 
@@ -53,6 +53,7 @@ Aunque la descripción del dataset dice que todas las imágenes son de 256×256,
 1. **MLP con backpropagation:** red multicapa densa con aprendizaje supervisado por corrección de errores (regla delta generalizada). Recibe la imagen reducida y aplanada en un vector, y tiene 11 neuronas de salida con Softmax. Es el modelo de referencia; no aprovecha la estructura bidimensional de la imagen.
 2. **Red convolucional desde cero:** capas de convolución, ReLU y pooling, seguidas de una capa de aplanado y una salida de 11 neuronas con Softmax. Recibe la imagen completa de 256×256×3.
 3. **Red convolucional preentrenada (transfer learning):** reutiliza las capas convolucionales de una arquitectura entrenada sobre ImageNet y reemplaza la salida por una de 11 clases. Se espera que sirva por el tamaño acotado del dataset.
+4. **Red preentrenada con ajuste fino y aumento de datos:** la misma MobileNetV2, con aumento de datos en el entrenamiento (espejado, rotación, zoom y contraste) y las últimas 40 capas entrenables con un learning rate de 0,0001 (las capas de normalización por lotes quedan congeladas). Busca reducir el sobreajuste de la red anterior.
 
 La topología final de cada red (capas, neuronas, activaciones, optimizador, tasa de aprendizaje) se define durante la experimentación usando el conjunto de validación.
 
@@ -62,9 +63,26 @@ La topología final de cada red (capas, neuronas, activaciones, optimizador, tas
 - Gráfico de la evolución de la loss durante el entrenamiento.
 - Matriz de confusión, precisión y recuperación (recall) por clase, **sobre el conjunto de entrenamiento y sobre el de prueba**.
 
+## Resultados
+
+Exactitud sobre los conjuntos de entrenamiento y de prueba:
+
+| Modelo | Entrenamiento | Prueba |
+|---|---:|---:|
+| MLP | 22,6 % | 21,8 % |
+| ConvNet desde cero | 42,8 % | 31,6 % |
+| MobileNetV2 preentrenada (base congelada) | 71,9 % | 40,1 % |
+| MobileNetV2 con ajuste fino y aumento de datos | 58,7 % | 42,6 % |
+
+Los gráficos de loss, las matrices de confusión y la precisión y recuperación por clase de cada modelo están en `results/<modelo>/`.
+
+## Cómo ejecutarlo
+
+El notebook `G16_TP2_Sistemas_Inteligentes.ipynb` corre todo en Google Colab con GPU. Clona este repositorio, monta Google Drive y toma las imágenes de la carpeta `ia/TP2/data` del Drive del grupo (la ruta se cambia en la variable `RUTA_DRIVE`). Las mismas imágenes, ya divididas, están en `data/train`, `data/val` y `data/test` de este repositorio.
+
 ## Herramientas
 
-Python, TensorFlow/Keras, scikit-learn, NumPy y matplotlib.
+Python, TensorFlow/Keras, scikit-learn, NumPy y matplotlib. Entrenamiento en Google Colab con GPU NVIDIA Tesla T4.
 
 ## Integrantes
 

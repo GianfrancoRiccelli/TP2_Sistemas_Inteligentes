@@ -1,0 +1,42 @@
+Modelo: cnn_finetuning
+
+Model: "cnn_finetuning"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ input_layer_1 (InputLayer)      │ (None, 224, 224, 3)    │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ aumento_de_datos (Sequential)   │ (None, 224, 224, 3)    │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ mobilenetv2_1.00_224            │ (None, 7, 7, 1280)     │     2,257,984 │
+│ (Functional)                    │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ global_average_pooling2d        │ (None, 1280)           │             0 │
+│ (GlobalAveragePooling2D)        │                        │               │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout (Dropout)               │ (None, 1280)           │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense (Dense)                   │ (None, 11)             │        14,091 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 5,626,979 (21.47 MB)
+ Trainable params: 1,677,451 (6.40 MB)
+ Non-trainable params: 594,624 (2.27 MB)
+ Optimizer params: 3,354,904 (12.80 MB)
+
+
+Entrenamiento
+  optimizador: Adam
+  learning rate inicial: 9.999999747378752e-05
+  loss: categorical_crossentropy
+  épocas máximas: 50
+  épocas entrenadas: 15
+  mejor época (menor val_loss): 7
+  paciencia EarlyStopping: 8
+  class_weight: no
+  callbacks extra: ninguno
+  tamaño de imagen: 224x224
+  batch size: 32
+  backbone: MobileNetV2 ImageNet, últimas 40 capas entrenables
+  aumento de datos: espejado horizontal, rotación 5 %, zoom 15 %, contraste 20 %
+  dropout antes de la salida: 0.3
+  evaluación: train/test
